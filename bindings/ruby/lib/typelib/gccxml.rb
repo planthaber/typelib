@@ -768,7 +768,11 @@ module Typelib
         #
         # Raises RuntimeError if gccxml failed to run
         def self.gccxml(file, options)
-            cmdline = ["gccxml", *gccxml_default_options]
+            if ENV["GCCXML_BIN"]
+                cmdline = [ENV["GCCXML_BIN"], *gccxml_default_options]
+            elsif
+                cmdline = ["gccxml", *gccxml_default_options]
+            end
             if raw = options[:rawflags]
                 cmdline.concat(raw)
             end
