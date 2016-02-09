@@ -768,8 +768,9 @@ module Typelib
         #
         # Raises RuntimeError if gccxml failed to run
         def self.gccxml(file, options)
-            if ENV["GCCXML_BIN"]
+            if ENV["GCCXML_BIN"] != nil
                 cmdline = [ENV["GCCXML_BIN"], *gccxml_default_options]
+                puts "using #{ENV["GCCXML_BIN"]} as gccxml replacement"
             elsif
                 cmdline = ["gccxml", *gccxml_default_options]
             end
